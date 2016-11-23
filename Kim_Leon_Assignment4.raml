@@ -1,0 +1,65 @@
+#%RAML 1.0
+title: assignment4
+baseUri: /Users/Leons/Documents/INFO3103/Assignment4
+version: v1
+
+/songs:
+  get:
+    description: Returns the entire collection/list of songs. Displays songID w/ title
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              "songs": [
+                {
+                  "songID": "ID Goes Here",
+                  "songTitle": "The Trooper"
+                },
+                {
+                  "songID": "Another ID",
+                  "songTitle": "God save the Queen"
+                }
+              ]
+
+  /{songID}:
+    description: A song element/entity
+    get:
+      description: Grabs a song specified by the song ID, 'songID = {songID}'
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "songID":"Randomly generated ID",
+                  "Title": "The Trooper",
+                  "youTubeURL": "https://www.youtube.com/watch?v=2G5rfPISIwo"
+                }
+        400:
+          body:
+            application/json:
+              example: |
+                {
+                  "Message": "Requested song not found"
+                }
+    post:
+      description: Upload a new song
+      responses:
+        201:
+          body:
+            application/json:
+              example: |
+                {
+                  "Message": "Song successfully created and uploaded"
+                }
+    delete:
+      description: Deletes a song specified by the ID
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "Message": "Song successfully deleted."
+                }
